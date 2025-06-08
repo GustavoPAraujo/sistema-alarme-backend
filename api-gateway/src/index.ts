@@ -36,7 +36,11 @@ const loggingServiceUrl = process.env.LOGGING_SERVICE_URL;
 // Qualquer chamada para /usuarios (ex: GET /usuarios, POST /usuarios, GET /usuarios/123)
 // será redirecionada para http://localhost:3001
 if (userServiceUrl) {
-  app.use('/usuarios', proxy(userServiceUrl));
+  app.use('/usuarios', proxy(userServiceUrl, {
+    proxyReqPathResolver: function (req) {
+      return req.originalUrl;
+    }
+  }));
 }
 
 // Proxy para o Serviço de Alarmes
@@ -46,23 +50,23 @@ if (alarmServiceUrl) {
 
 // Proxy para o Serviço de Controle de Acionamento
 if (triggerControlServiceUrl) {
-    app.use('/acionar', proxy(triggerControlServiceUrl));
-    app.use('/desarmar', proxy(triggerControlServiceUrl));
+  app.use('/acionar', proxy(triggerControlServiceUrl));
+  app.use('/desarmar', proxy(triggerControlServiceUrl));
 }
 
 // Proxy para o Serviço de Controle de Disparo
 if (dispatchControlServiceUrl) {
-    app.use('/disparar', proxy(dispatchControlServiceUrl));
+  app.use('/disparar', proxy(dispatchControlServiceUrl));
 }
 
 // Proxy para o Serviço de Notificação
 if (notificationServiceUrl) {
-    app.use('/notificar', proxy(notificationServiceUrl));
+  app.use('/notificar', proxy(notificationServiceUrl));
 }
 
 // Proxy para o Serviço de Logging
 if (loggingServiceUrl) {
-    app.use('/logs', proxy(loggingServiceUrl));
+  app.use('/logs', proxy(loggingServiceUrl));
 }
 
 
