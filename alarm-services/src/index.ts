@@ -11,7 +11,6 @@ const userServiceUrl = process.env.USER_SERVICE_URL;
 
 app.use(express.json());
 
-// Criar um novo alarme
 app.post('/alarmes', async (req: Request, res: Response) => {
     try {
         const { nome, localizacao } = req.body;
@@ -26,7 +25,6 @@ app.post('/alarmes', async (req: Request, res: Response) => {
     }
 });
 
-// Associar um usuário a um alarme
 app.post('/alarmes/:id/usuarios', async (req: Request, res: Response) => {
     const { id: id_alarme } = req.params;
     const { id_usuario } = req.body;
@@ -54,7 +52,6 @@ app.post('/alarmes/:id/usuarios', async (req: Request, res: Response) => {
     }
 });
 
-// Listar IDs dos usuários de um alarme
 app.get('/alarmes/:id/usuarios', async (req: Request, res: Response) => {
     try {
         const { id: id_alarme } = req.params;
@@ -70,5 +67,5 @@ app.get('/alarmes/:id/usuarios', async (req: Request, res: Response) => {
 });
 
 app.listen(port, () => {
-    console.log(`🚨 Serviço de Alarmes rodando na porta ${port}`);
+    console.log(`Serviço de Alarmes rodando na porta ${port}`);
 });

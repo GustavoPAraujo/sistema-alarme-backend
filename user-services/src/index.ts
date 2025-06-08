@@ -7,14 +7,9 @@ dotenv.config();
 const app = express();
 const port = process.env.SERVICE_PORT || 3001;
 
-// Middleware para que o Express entenda JSON no corpo das requisições.
-// Esta é uma chamada de função separada.
 app.use(express.json());
 
-// --- ROTAS DO CRUD DE USUÁRIOS ---
-// Cada chamada de app.get, app.post, etc., também é uma função separada.
 
-// ROTA: Criar um novo usuário (CREATE)
 app.post('/usuarios', async (req: Request, res: Response) => {
   try {
     const { nome, celular } = req.body;
@@ -29,7 +24,6 @@ app.post('/usuarios', async (req: Request, res: Response) => {
 
     res.status(201).json(newUser.rows[0]);
   } catch (err) {
-    // Tratamento de erro mais seguro em TypeScript
     if (err instanceof Error) {
         console.error("Erro ao criar usuário:", err.message);
     } else {
@@ -39,7 +33,6 @@ app.post('/usuarios', async (req: Request, res: Response) => {
   }
 });
 
-// ROTA: Obter todos os usuários (READ)
 app.get('/usuarios', async (req: Request, res: Response) => {
   try {
     const allUsers = await pool.query("SELECT * FROM usuarios ORDER BY id ASC");
@@ -54,7 +47,6 @@ app.get('/usuarios', async (req: Request, res: Response) => {
   }
 });
 
-// ROTA: Obter um usuário específico pelo ID (READ)
 app.get('/usuarios/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -75,7 +67,6 @@ app.get('/usuarios/:id', async (req: Request, res: Response) => {
   }
 });
 
-// ROTA: Atualizar um usuário (UPDATE)
 app.put('/usuarios/:id', async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
@@ -105,7 +96,6 @@ app.put('/usuarios/:id', async (req: Request, res: Response) => {
     }
 });
 
-// ROTA: Deletar um usuário (DELETE)
 app.delete('/usuarios/:id', async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
@@ -126,7 +116,6 @@ app.delete('/usuarios/:id', async (req: Request, res: Response) => {
     }
 });
 
-// Inicia o servidor para escutar na porta definida
 app.listen(port, () => {
   console.log(`👤 Serviço de Usuários rodando na porta ${port}`);
 });
