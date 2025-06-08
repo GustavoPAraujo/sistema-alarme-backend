@@ -57,7 +57,11 @@ if (dispatchControlServiceUrl) {
 
 
 if (notificationServiceUrl) {
-  app.use('/notificar', proxy(notificationServiceUrl));
+  app.use('/notificar', proxy(notificationServiceUrl, {
+    proxyReqPathResolver: function (req) {
+      return '/notificar';
+    }
+  }));
 }
 
 
