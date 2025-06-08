@@ -45,7 +45,11 @@ if (userServiceUrl) {
 
 // Proxy para o Serviço de Alarmes
 if (alarmServiceUrl) {
-  app.use('/alarmes', proxy(alarmServiceUrl));
+  app.use('/alarmes', proxy(alarmServiceUrl, {
+    proxyReqPathResolver: function (req) {
+      return req.originalUrl;
+    }
+  }));
 }
 
 // Proxy para o Serviço de Controle de Acionamento
