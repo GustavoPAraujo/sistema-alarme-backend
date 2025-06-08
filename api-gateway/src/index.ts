@@ -62,7 +62,11 @@ if (notificationServiceUrl) {
 
 
 if (loggingServiceUrl) {
-  app.use('/logs', proxy(loggingServiceUrl));
+  app.use('/logs', proxy(loggingServiceUrl, {
+    proxyReqPathResolver: function (req) {
+      return req.originalUrl;
+    }
+  }));
 }
 
 
