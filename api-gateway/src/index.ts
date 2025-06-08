@@ -46,8 +46,16 @@ if (alarmServiceUrl) {
 
 
 if (triggerControlServiceUrl) {
-  app.use('/acionar', proxy(triggerControlServiceUrl));
-  app.use('/desarmar', proxy(triggerControlServiceUrl));
+  app.use('/acionar', proxy(triggerControlServiceUrl, {
+    proxyReqPathResolver: function (req) {
+      return req.originalUrl;
+    }
+  }));
+  app.use('/desarmar', proxy(triggerControlServiceUrl, {
+    proxyReqPathResolver: function (req) {
+      return req.originalUrl;
+    }
+  }));
 }
 
 
