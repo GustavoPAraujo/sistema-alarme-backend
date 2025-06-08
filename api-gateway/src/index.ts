@@ -84,5 +84,5 @@ app.get('/status', (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`🚀 API Gateway rodando na porta ${port}`);
+  console.log(`API Gateway rodando na porta ${port}`);
 });

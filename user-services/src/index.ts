@@ -117,5 +117,5 @@ app.delete('/usuarios/:id', async (req: Request, res: Response) => {
 });
 
 app.listen(port, () => {
-  console.log(`👤 Serviço de Usuários rodando na porta ${port}`);
+  console.log(`Serviço de Usuários rodando na porta ${port}`);
 });

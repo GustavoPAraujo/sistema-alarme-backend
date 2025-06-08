@@ -56,5 +56,5 @@ app.get('/logs', async (req: Request, res: Response) => {
 
 
 app.listen(port, () => {
-    console.log(`📋 Serviço de Logging rodando na porta ${port}`);
+    console.log(`Serviço de Logging rodando na porta ${port}`);
 });
