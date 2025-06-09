@@ -34,7 +34,7 @@ app.post('/disparar', async (req: Request, res: Response) => {
         const notificationPromises = permittedUsers.map(user => {
             return axios.post(`${notificationServiceUrl}/notificar`, {
                 id_usuario: user.id_usuario,
-                mensagem: `ALERTA! O alarme (ID: ${id_alarme}) foi DISPARADO!`
+                mensagem: `ALERTA! O alarme (ID: ${id_alarme}) foi DISPARADO! Disparado no ponto ${id_ponto}`
             });
         });
 
