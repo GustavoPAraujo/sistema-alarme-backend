@@ -60,7 +60,11 @@ if (triggerControlServiceUrl) {
 
 
 if (dispatchControlServiceUrl) {
-  app.use('/disparar', proxy(dispatchControlServiceUrl));
+  app.use('/disparar', proxy(dispatchControlServiceUrl, {
+    proxyReqPathResolver: function (req) {
+      return req.originalUrl;
+    }
+  }));
 }
 
 

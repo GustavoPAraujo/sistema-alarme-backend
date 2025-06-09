@@ -1,0 +1,11 @@
+# Dependências instaladas pelo NPM
+node_modules/
+
+# Arquivo de variáveis de ambiente (Contém senhas e segredos!)
+.env
+
+# Pasta com o código compilado para JavaScript
+dist/
+
+# Logs de erro e debug do NPM
+npm-debug.log*
