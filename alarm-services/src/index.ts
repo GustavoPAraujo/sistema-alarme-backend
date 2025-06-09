@@ -66,6 +66,21 @@ app.get('/alarmes/:id/usuarios', async (req: Request, res: Response) => {
     }
 });
 
+app.post('/alarmes/:id/pontos', async (req: Request, res: Response) => {
+    try {
+        const { id: id_alarme } = req.params;
+        const { nome_ponto } = req.body;
+        const newPoint = await pool.query(
+            "INSERT INTO pontos_monitorados (id_alarme, nome_ponto) VALUES ($1, $2) RETURNING *",
+            [id_alarme, nome_ponto]
+        );
+        res.status(201).json(newPoint.rows[0]);
+    } catch (err) {
+        if (err instanceof Error) console.error(err.message);
+        res.status(500).json({ error: 'Erro no servidor ao criar ponto monitorado' });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Serviço de Alarmes rodando na porta ${port}`);
 });
